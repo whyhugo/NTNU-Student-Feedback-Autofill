@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            width: 250px;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 10px;
+        }
+
+        button {
+            width: 90%;
+            padding: 12px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        #fill-agree {
+            background-color: #4CAF50;
+            /* 綠色 */
+        }
+
+        #fill-agree:hover {
+            background-color: #45a049;
+        }
+
+        #fill-disagree {
+            background-color: #f44336;
+            /* 紅色 */
+        }
+
+        #fill-disagree:hover {
+            background-color: #da190b;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>課程評鑑自動填寫</h3>
+    <button id="fill-agree">全部填寫「非常符合」</button>
+    <button id="fill-disagree">全部填寫「非常不符合」</button>
+    <script src="popup.js"></script>
+</body>
+
+</html>
