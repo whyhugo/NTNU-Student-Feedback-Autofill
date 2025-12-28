@@ -1,12 +1,19 @@
 const sliderLabels = {
-    1: '非常不符合',
-    2: '不符合',
-    3: '普通',
-    4: '符合',
-    5: '非常符合'
+    1: '⭐',
+    2: '⭐⭐',
+    3: '⭐⭐⭐',
+    4: '⭐⭐⭐⭐',
+    5: '⭐⭐⭐⭐⭐'
 };
 
-// 填寫「學習自評」區塊：統一填「全部符合」
+// 取得滑桿值轉換為課程意見的實際等級（左高右低）
+function resolveCourseLevel(raw) {
+    const numeric = Number(raw);
+    if (Number.isNaN(numeric)) return 5;
+    return 6 - numeric; // 1 -> 5(非常符合), 5 -> 1(非常不符合)
+}
+
+// 填寫「學習自評」區塊
 function fillSelfEvaluation() {
     const radios = Array.from(document.querySelectorAll('input[id^="id_t1_"][type="radio"]'));
     const groups = new Map();
@@ -113,7 +120,8 @@ document.getElementById('self-fail').addEventListener('click', () => {
 const courseSlider = document.getElementById('course-slider');
 const courseSliderText = document.getElementById('course-slider-text');
 function updateSliderText() {
-    const label = sliderLabels[courseSlider.value] || `${courseSlider.value} 分`;
+    const level = resolveCourseLevel(courseSlider.value);
+    const label = sliderLabels[level] || `${level} 分`;
     courseSliderText.textContent = label;
 }
 courseSlider.addEventListener('input', updateSliderText);
@@ -121,7 +129,7 @@ updateSliderText();
 
 // 套用課程意見調查
 document.getElementById('apply-course').addEventListener('click', () => {
-    const level = Number(courseSlider.value);
+    const level = resolveCourseLevel(courseSlider.value);
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.scripting.executeScript({
             target: { tabId: tabs[0].id },

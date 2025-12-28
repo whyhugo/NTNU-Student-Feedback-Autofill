@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <style>
         body {
-            width: 280px;
+            width: 320px;
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 10px;
@@ -71,25 +71,70 @@
         #apply-course {
             background: #2563eb;
             width: 100%;
-            margin-top: 8px;
+            margin-top: 14px;
         }
 
         .slider-row {
             display: flex;
             align-items: center;
             gap: 8px;
+            margin-top: 6px;
+            margin-bottom: 6px;
+            padding: 0 6.5%;
         }
 
         #course-slider {
             flex: 1;
+            appearance: none;
+            height: 6px;
+            border-radius: 999px;
+            background: #e5e7eb;
+            outline: none;
+        }
+
+        #course-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #2563eb;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 0 0 2px #ffffff;
+        }
+
+        #course-slider::-moz-range-thumb {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #2563eb;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 0 0 2px #ffffff;
+        }
+
+        #course-slider::-moz-range-track {
+            height: 6px;
+            border-radius: 999px;
+            background: #e5e7eb;
+        }
+
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .slider-labels {
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 4px;
             font-size: 11px;
             color: #6b7280;
             margin-top: 4px;
+            text-align: center;
+        }
+
+        .slider-labels span {
+            display: block;
         }
 
         .pill {
@@ -117,16 +162,19 @@
 
     <div class="card">
         <h4>課程意見調查</h4>
-        <div class="slider-row">
+        <div class="slider-header">
+            <span style="color:#6b7280;font-size:12px;">拖曳選擇程度</span>
             <span class="pill" id="course-slider-text">非常符合</span>
-            <input type="range" id="course-slider" min="1" max="5" step="1" value="5">
+        </div>
+        <div class="slider-row">
+            <input type="range" id="course-slider" min="1" max="5" step="1" value="1">
         </div>
         <div class="slider-labels">
-            <span>非常不符合</span>
-            <span>不符合</span>
+            <span>👍👍👍</span>
+            <span>還不錯</span>
             <span>普通</span>
-            <span>符合</span>
-            <span>非常符合</span>
+            <span>不太好</span>
+            <span>💩💩💩</span>
         </div>
         <button id="apply-course">套用課程意見</button>
     </div>
