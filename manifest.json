@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "NTNU 期末課程評鑑速速填",
-  "version": "1.0",
-  "description": "快速填寫期末課程評鑑，可選擇全部「非常符合」或「非常不符合」，並自動填寫自評部分。",
+  "version": "2.0",
+  "description": "快速填寫期末課程評鑑，可透過滑桿選擇程度，自動快速填入相同評分。",
   "permissions": [
     "activeTab",
     "scripting"
