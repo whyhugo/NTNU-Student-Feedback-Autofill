@@ -11,166 +11,161 @@
         }
 
         body {
-            width: 360px;
-            min-height: 430px;
-            font-family: 'Noto Sans TC', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            width: 380px;
+            min-height: 460px;
+            font-family: 'Roboto', 'Noto Sans TC', sans-serif;
             text-align: center;
-            padding: 16px;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            padding: 20px;
+            background: #1c1b1f;
             position: relative;
-            overflow: hidden;
         }
 
         h3 {
-            margin: 0 0 16px;
-            color: white;
-            font-size: 18px;
-            font-weight: 600;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            letter-spacing: 0.3px;
-            position: relative;
-            z-index: 1;
+            margin: 0 0 20px;
+            color: #e6e1e5;
+            font-size: 22px;
+            font-weight: 400;
+            letter-spacing: 0;
+            text-align: left;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(16px) saturate(180%);
-            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            background: #2b2930;
             border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 20px;
+            margin-bottom: 16px;
+            border: none;
             box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+                0 1px 3px rgba(0, 0, 0, 0.3),
+                0 4px 8px rgba(0, 0, 0, 0.15);
             text-align: left;
             position: relative;
-            z-index: 1;
-            transition: all 0.3s ease;
+            transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .card:hover {
             box-shadow: 
-                0 12px 40px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.25);
+                0 2px 6px rgba(0, 0, 0, 0.3),
+                0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
         .card h4 {
-            margin: 0 0 10px;
-            font-size: 15px;
-            color: white;
-            font-weight: 600;
-            text-shadow: 0 2px 6px rgba(0,0,0,0.12);
+            margin: 0 0 12px;
+            font-size: 16px;
+            color: #e6e1e5;
+            font-weight: 500;
+            letter-spacing: 0.1px;
         }
 
         .card p {
-            margin: 6px 0 0;
-            color: rgba(255, 255, 255, 0.85);
+            margin: 8px 0 0;
+            color: #cac4d0;
             font-size: 12px;
-            line-height: 1.4;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.08);
+            line-height: 1.5;
+            letter-spacing: 0.4px;
         }
 
         .button-row {
             display: flex;
-            gap: 8px;
-            margin-top: 6px;
+            gap: 12px;
+            margin-top: 8px;
         }
 
         button {
             flex: 1;
-            padding: 11px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 10px;
+            border-radius: 20px;
             cursor: pointer;
-            font-size: 13px;
-            font-weight: 600;
-            color: white;
+            font-size: 14px;
+            font-weight: 500;
+            color: #ffffff;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 
-                0 4px 12px rgba(0, 0, 0, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+                0 1px 2px rgba(0, 0, 0, 0.3),
+                0 1px 3px rgba(0, 0, 0, 0.15);
+            letter-spacing: 0.1px;
         }
 
         button::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+            background: rgba(255, 255, 255, 0.16);
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         button:hover {
             box-shadow: 
-                0 8px 24px rgba(0, 0, 0, 0.25),
-                inset 0 1px 0 rgba(255, 255, 255, 0.4),
-                0 0 20px rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(8px);
+                0 2px 4px rgba(0, 0, 0, 0.35),
+                0 8px 18px rgba(0, 0, 0, 0.28);
         }
 
         button:hover::before {
             opacity: 1;
         }
 
+        button:focus {
+            outline: none;
+        }
+
+        button:focus::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            border-radius: 20px;
+        }
+
         button:active {
-            opacity: 0.9;
+            box-shadow: 
+                0 1px 2px rgba(0, 0, 0, 0.35),
+                0 2px 6px rgba(0, 0, 0, 0.28);
         }
 
         #self-pass {
-            background: linear-gradient(135deg, #10b981, #059669);
-        }
-
-        #self-pass:hover {
-            background: linear-gradient(135deg, #34d399, #10b981);
+            background: #4db6ac;
         }
 
         #self-fail {
-            background: linear-gradient(135deg, #06b6d4, #0891b2);
-        }
-
-        #self-fail:hover {
-            background: linear-gradient(135deg, #22d3ee, #06b6d4);
+            background: #4fc3f7;
         }
 
         #apply-course {
-            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            background: #7e57c2;
             width: 100%;
-            margin-top: 12px;
-        }
-
-        #apply-course:hover {
-            background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+            margin-top: 16px;
+            border-radius: 100px;
+            padding: 14px 24px;
+            font-size: 14px;
         }
 
         .slider-row {
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-top: 14px;
+            margin-top: 16px;
             margin-bottom: 8px;
-            padding: 0 4px;
+            padding: 0 18px;
         }
 
         #course-slider {
             flex: 1;
             appearance: none;
-            height: 8px;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.15);
+            height: 4px;
+            border-radius: 2px;
+            background: #49454f;
             outline: none;
             position: relative;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         #course-slider:hover {
-            background: rgba(255, 255, 255, 0.25);
+            background: #5a5662;
         }
 
         #course-slider::-webkit-slider-thumb {
@@ -178,52 +173,52 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #ffffff, #f0f0f0);
-            border: 2px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 
-                0 3px 10px rgba(0, 0, 0, 0.2),
-                0 0 0 3px rgba(255, 255, 255, 0.2);
+            background: #d0bcff;
+            border: none;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
             cursor: grab;
-            transition: all 0.2s ease;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         #course-slider::-webkit-slider-thumb:hover {
-            transform: scale(1.15);
+            background: #e0d0ff;
             box-shadow: 
-                0 4px 14px rgba(0, 0, 0, 0.25),
-                0 0 0 4px rgba(255, 255, 255, 0.25);
+                0 2px 6px rgba(0, 0, 0, 0.4),
+                0 0 0 8px rgba(208, 188, 255, 0.12);
         }
 
         #course-slider::-webkit-slider-thumb:active {
             cursor: grabbing;
-            transform: scale(1.1);
+            background: #c0acef;
+            box-shadow: 
+                0 1px 3px rgba(0, 0, 0, 0.4),
+                0 0 0 12px rgba(208, 188, 255, 0.16);
         }
 
         #course-slider::-moz-range-thumb {
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #ffffff, #f0f0f0);
-            border: 2px solid rgba(255, 255, 255, 0.9);
-            box-shadow: 
-                0 3px 10px rgba(0, 0, 0, 0.2),
-                0 0 0 3px rgba(255, 255, 255, 0.2);
+            background: #d0bcff;
+            border: none;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
             cursor: grab;
-            transition: all 0.2s ease;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         #course-slider::-moz-range-thumb:hover {
-            transform: scale(1.15);
+            background: #e0d0ff;
         }
 
         #course-slider::-moz-range-thumb:active {
             cursor: grabbing;
+            background: #c0acef;
         }
 
         #course-slider::-moz-range-track {
-            height: 8px;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.15);
+            height: 4px;
+            border-radius: 2px;
+            background: #49454f;
         }
 
         .slider-header {
@@ -237,57 +232,56 @@
             grid-template-columns: repeat(5, 1fr);
             gap: 4px;
             font-size: 11px;
-            color: rgba(255, 255, 255, 0.85);
-            margin-top: 5px;
+            color: #cac4d0;
+            margin-top: 8px;
             text-align: center;
+            letter-spacing: 0.4px;
         }
 
         .slider-labels span {
             display: block;
-            transition: all 0.2s ease;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.08);
+            transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .slider-labels span:hover {
-            color: white;
+            color: #e6e1e5;
         }
 
         .pill {
             display: inline-block;
-            padding: 3px 10px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(8px);
-            border-radius: 999px;
+            padding: 4px 12px;
+            background: #49454f;
+            border-radius: 8px;
             font-size: 12px;
-            font-weight: 600;
-            color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-            transition: all 0.2s ease;
+            font-weight: 500;
+            color: #e6e1e5;
+            border: none;
+            letter-spacing: 0.1px;
+            transition: background 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .pill:hover {
-            background: rgba(255, 255, 255, 0.25);
+            background: #5a5662;
         }
     </style>
 </head>
 
 <body>
-    <h3>✨ NTNU 課程評鑑自動填寫</h3>
+    <h3>NTNU 課程評鑑自動填寫</h3>
 
     <div class="card">
-        <h4>💡 學習自評</h4>
+        <h4>學習自評</h4>
         <div class="button-row">
-            <button id="self-pass">全部符合 🤝</button>
-            <button id="self-fail">哪次不符合 😎</button>
+            <button id="self-pass">全部符合</button>
+            <button id="self-fail">哪次不符合</button>
         </div>
         <p>僅設定「學習自評」區塊。</p>
     </div>
 
     <div class="card">
-        <h4>📊 課程意見調查</h4>
+        <h4>課程意見調查</h4>
         <div class="slider-header">
-            <span style="color:rgba(255,255,255,0.9);font-size:12px;font-weight:500;">拖曳選擇程度</span>
+            <span style="color:#cac4d0;font-size:12px;font-weight:400;letter-spacing:0.4px;">拖曳選擇程度</span>
             <span class="pill" id="course-slider-text">非常符合</span>
         </div>
         <div class="slider-row">
