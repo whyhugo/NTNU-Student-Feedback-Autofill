@@ -5,49 +5,132 @@
     <meta charset="UTF-8">
     <style>
         body {
-            width: 250px;
+            width: 280px;
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 10px;
+            background: #f6f7fb;
+        }
+        h3 {
+            margin: 0 0 12px;
+            color: #1f2937;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            text-align: left;
+        }
+
+        .card h4 {
+            margin: 0 0 8px;
+            font-size: 14px;
+            color: #111827;
+        }
+
+        .card p {
+            margin: 4px 0 0;
+            color: #6b7280;
+            font-size: 12px;
+        }
+
+        .button-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 6px;
         }
 
         button {
-            width: 90%;
-            padding: 12px;
-            margin: 8px 0;
+            flex: 1;
+            padding: 10px;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
             font-size: 14px;
             font-weight: bold;
             color: white;
-            transition: background-color 0.3s;
+            transition: transform 0.1s ease, box-shadow 0.2s ease;
         }
 
-        #fill-agree {
-            background-color: #4CAF50;
-            /* 綠色 */
+        button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
 
-        #fill-agree:hover {
-            background-color: #45a049;
+        #self-pass {
+            background: #10b981;
         }
 
-        #fill-disagree {
-            background-color: #f44336;
-            /* 紅色 */
+        #self-fail {
+            background: #13c4c4;
         }
 
-        #fill-disagree:hover {
-            background-color: #da190b;
+        #apply-course {
+            background: #2563eb;
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        .slider-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        #course-slider {
+            flex: 1;
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #6b7280;
+            margin-top: 4px;
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 2px 8px;
+            background: #e5e7eb;
+            border-radius: 999px;
+            font-size: 12px;
+            color: #374151;
         }
     </style>
 </head>
 
 <body>
     <h3>課程評鑑自動填寫</h3>
-    <button id="fill-agree">全部填寫「非常符合」</button>
-    <button id="fill-disagree">全部填寫「非常不符合」</button>
+
+    <div class="card">
+        <h4>學習自評</h4>
+        <div class="button-row">
+            <button id="self-pass">全部符合🤝</button>
+            <button id="self-fail">哪次不符合😎</button>
+        </div>
+        <p>僅設定「學習自評」區塊。</p>
+    </div>
+
+    <div class="card">
+        <h4>課程意見調查</h4>
+        <div class="slider-row">
+            <span class="pill" id="course-slider-text">非常符合</span>
+            <input type="range" id="course-slider" min="1" max="5" step="1" value="5">
+        </div>
+        <div class="slider-labels">
+            <span>非常不符合</span>
+            <span>不符合</span>
+            <span>普通</span>
+            <span>符合</span>
+            <span>非常符合</span>
+        </div>
+        <button id="apply-course">套用課程意見</button>
+    </div>
+
     <script src="popup.js"></script>
 </body>
 
