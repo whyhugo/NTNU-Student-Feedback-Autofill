@@ -4,37 +4,72 @@
 <head>
     <meta charset="UTF-8">
     <style>
-        body {
-            width: 320px;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 10px;
-            background: #f6f7fb;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
+
+        body {
+            width: 360px;
+            min-height: 430px;
+            font-family: 'Noto Sans TC', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            text-align: center;
+            padding: 16px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
         h3 {
-            margin: 0 0 12px;
-            color: #1f2937;
+            margin: 0 0 16px;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            letter-spacing: 0.3px;
+            position: relative;
+            z-index: 1;
         }
 
         .card {
-            background: white;
-            border-radius: 8px;
-            padding: 12px;
-            margin-bottom: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border-radius: 16px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
             text-align: left;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 
+                0 12px 40px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.25);
         }
 
         .card h4 {
-            margin: 0 0 8px;
-            font-size: 14px;
-            color: #111827;
+            margin: 0 0 10px;
+            font-size: 15px;
+            color: white;
+            font-weight: 600;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.12);
         }
 
         .card p {
-            margin: 4px 0 0;
-            color: #6b7280;
+            margin: 6px 0 0;
+            color: rgba(255, 255, 255, 0.85);
             font-size: 12px;
+            line-height: 1.4;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.08);
         }
 
         .button-row {
@@ -45,76 +80,150 @@
 
         button {
             flex: 1;
-            padding: 10px;
+            padding: 11px;
             border: none;
-            border-radius: 6px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 14px;
-            font-weight: bold;
+            font-size: 13px;
+            font-weight: 600;
             color: white;
-            transition: transform 0.1s ease, box-shadow 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 4px 12px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            box-shadow: 
+                0 8px 24px rgba(0, 0, 0, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                0 0 20px rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(8px);
+        }
+
+        button:hover::before {
+            opacity: 1;
+        }
+
+        button:active {
+            opacity: 0.9;
         }
 
         #self-pass {
-            background: #10b981;
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        #self-pass:hover {
+            background: linear-gradient(135deg, #34d399, #10b981);
         }
 
         #self-fail {
-            background: #13c4c4;
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+        }
+
+        #self-fail:hover {
+            background: linear-gradient(135deg, #22d3ee, #06b6d4);
         }
 
         #apply-course {
-            background: #2563eb;
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
             width: 100%;
-            margin-top: 14px;
+            margin-top: 12px;
+        }
+
+        #apply-course:hover {
+            background: linear-gradient(135deg, #a78bfa, #8b5cf6);
         }
 
         .slider-row {
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-top: 6px;
-            margin-bottom: 6px;
-            padding: 0 6.5%;
+            margin-top: 14px;
+            margin-bottom: 8px;
+            padding: 0 4px;
         }
 
         #course-slider {
             flex: 1;
             appearance: none;
-            height: 6px;
+            height: 8px;
             border-radius: 999px;
-            background: #e5e7eb;
+            background: rgba(255, 255, 255, 0.15);
             outline: none;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #course-slider:hover {
+            background: rgba(255, 255, 255, 0.25);
         }
 
         #course-slider::-webkit-slider-thumb {
             appearance: none;
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            background: #2563eb;
-            border: 1px solid #cbd5e1;
-            box-shadow: 0 0 0 2px #ffffff;
+            background: linear-gradient(135deg, #ffffff, #f0f0f0);
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 
+                0 3px 10px rgba(0, 0, 0, 0.2),
+                0 0 0 3px rgba(255, 255, 255, 0.2);
+            cursor: grab;
+            transition: all 0.2s ease;
+        }
+
+        #course-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+            box-shadow: 
+                0 4px 14px rgba(0, 0, 0, 0.25),
+                0 0 0 4px rgba(255, 255, 255, 0.25);
+        }
+
+        #course-slider::-webkit-slider-thumb:active {
+            cursor: grabbing;
+            transform: scale(1.1);
         }
 
         #course-slider::-moz-range-thumb {
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            background: #2563eb;
-            border: 1px solid #cbd5e1;
-            box-shadow: 0 0 0 2px #ffffff;
+            background: linear-gradient(135deg, #ffffff, #f0f0f0);
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 
+                0 3px 10px rgba(0, 0, 0, 0.2),
+                0 0 0 3px rgba(255, 255, 255, 0.2);
+            cursor: grab;
+            transition: all 0.2s ease;
+        }
+
+        #course-slider::-moz-range-thumb:hover {
+            transform: scale(1.15);
+        }
+
+        #course-slider::-moz-range-thumb:active {
+            cursor: grabbing;
         }
 
         #course-slider::-moz-range-track {
-            height: 6px;
+            height: 8px;
             border-radius: 999px;
-            background: #e5e7eb;
+            background: rgba(255, 255, 255, 0.15);
         }
 
         .slider-header {
@@ -128,42 +237,57 @@
             grid-template-columns: repeat(5, 1fr);
             gap: 4px;
             font-size: 11px;
-            color: #6b7280;
-            margin-top: 4px;
+            color: rgba(255, 255, 255, 0.85);
+            margin-top: 5px;
             text-align: center;
         }
 
         .slider-labels span {
             display: block;
+            transition: all 0.2s ease;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.08);
+        }
+
+        .slider-labels span:hover {
+            color: white;
         }
 
         .pill {
             display: inline-block;
-            padding: 2px 8px;
-            background: #e5e7eb;
+            padding: 3px 10px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
             border-radius: 999px;
             font-size: 12px;
-            color: #374151;
+            font-weight: 600;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        .pill:hover {
+            background: rgba(255, 255, 255, 0.25);
         }
     </style>
 </head>
 
 <body>
-    <h3>NTNU 課程評鑑自動填寫</h3>
+    <h3>✨ NTNU 課程評鑑自動填寫</h3>
 
     <div class="card">
-        <h4>學習自評</h4>
+        <h4>💡 學習自評</h4>
         <div class="button-row">
-            <button id="self-pass">全部符合🤝</button>
-            <button id="self-fail">哪次不符合😎</button>
+            <button id="self-pass">全部符合 🤝</button>
+            <button id="self-fail">哪次不符合 😎</button>
         </div>
         <p>僅設定「學習自評」區塊。</p>
     </div>
 
     <div class="card">
-        <h4>課程意見調查</h4>
+        <h4>📊 課程意見調查</h4>
         <div class="slider-header">
-            <span style="color:#6b7280;font-size:12px;">拖曳選擇程度</span>
+            <span style="color:rgba(255,255,255,0.9);font-size:12px;font-weight:500;">拖曳選擇程度</span>
             <span class="pill" id="course-slider-text">非常符合</span>
         </div>
         <div class="slider-row">
