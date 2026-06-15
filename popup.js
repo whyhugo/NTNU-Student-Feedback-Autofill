@@ -13,7 +13,7 @@ function resolveCourseLevel(raw) {
     return 6 - numeric; // 1 -> 5(非常符合), 5 -> 1(非常不符合)
 }
 
-// 填寫「學習自評」區塊
+// 填寫「學習自評」區塊，回傳實際填寫的題數
 function fillSelfEvaluation() {
     const radios = Array.from(document.querySelectorAll('input[id^="id_t1_"][type="radio"]'));
     const groups = new Map();
@@ -27,6 +27,7 @@ function fillSelfEvaluation() {
         groups.get(name).push(radio);
     });
 
+    let filled = 0;
     groups.forEach((list) => {
         let target = null;
         list.forEach((radio) => {
@@ -41,17 +42,19 @@ function fillSelfEvaluation() {
 
         if (target) {
             target.radio.checked = true;
+            filled += 1;
         }
     });
 
-    // alert('學習自評已填為「全部符合」');
+    return filled;
 }
 
-// 填寫「課程意見調查」區塊：依滑桿選擇 1~5 分
+// 填寫「課程意見調查」區塊：依滑桿選擇 1~5 分，回傳實際填寫的題數
 function fillCourseSurvey(level) {
     const questions = document.querySelectorAll('#part2 .jumbotron');
     const levelString = String(level);
 
+    let filled = 0;
     questions.forEach((question) => {
         let radioButton = question.querySelector(`input[type="radio"][id$="_g${levelString}"]`);
         if (!radioButton) {
@@ -63,6 +66,7 @@ function fillCourseSurvey(level) {
 
         if (radioButton) {
             radioButton.checked = true;
+            filled += 1;
             const reasonCheckboxName = 'qq' + radioButton.id.substring(2);
             const reasonCheckboxes = document.querySelectorAll(`input[type="checkbox"][name="${reasonCheckboxName}"]`);
             reasonCheckboxes.forEach((checkbox) => {
@@ -83,42 +87,70 @@ function fillCourseSurvey(level) {
         commentsTextarea.value = commentByLevel[level] || '';
     }
 
-    const labelMap = {
-        1: '非常不符合',
-        2: '不符合',
-        3: '普通',
-        4: '符合',
-        5: '非常符合'
-    };
-    const label = labelMap[level] || `${level} 分`;
-    // alert(`課程意見調查已填為「${label}」`);
+    return filled;
 }
 
-// 監聽學習自評：全部符合
-document.getElementById('self-pass').addEventListener('click', () => {
+const courseLabelMap = {
+    1: '非常不符合',
+    2: '不符合',
+    3: '普通',
+    4: '符合',
+    5: '非常符合'
+};
+
+// 於擴充功能畫面內顯示提示訊息（取代會卡住 iframe 的 alert）
+const statusEl = document.getElementById('status');
+let statusTimer = null;
+function showStatus(message) {
+    if (!statusEl) return;
+    statusEl.textContent = message;
+    statusEl.classList.add('visible');
+    if (statusTimer) {
+        clearTimeout(statusTimer);
+    }
+    statusTimer = setTimeout(() => {
+        statusEl.classList.remove('visible');
+    }, 2800);
+}
+
+// 在目前分頁（含所有 iframe）執行注入函式，並彙整各 frame 回傳的填寫題數
+function runInPage(func, args, onDone) {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        if (!tabs[0]) {
+            showStatus('找不到作用中的分頁');
+            return;
+        }
         chrome.scripting.executeScript({
             target: {
                 tabId: tabs[0].id,
                 allFrames: true
             },
-            function: fillSelfEvaluation,
-            args: []
+            function: func,
+            args: args
+        }, (injectionResults) => {
+            if (chrome.runtime.lastError) {
+                showStatus('無法在此頁面執行，請確認位於問卷頁面');
+                return;
+            }
+            const total = (injectionResults || []).reduce((sum, item) => {
+                return sum + (typeof item.result === 'number' ? item.result : 0);
+            }, 0);
+            onDone(total);
         });
+    });
+}
+
+// 監聽學習自評：全部符合
+document.getElementById('self-pass').addEventListener('click', () => {
+    runInPage(fillSelfEvaluation, [], (count) => {
+        showStatus(count > 0 ? `學習自評已填寫 ${count} 題` : '找不到可填寫的學習自評欄位');
     });
 });
 
 // 監聽學習自評：全部不符合
 document.getElementById('self-fail').addEventListener('click', () => {
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        chrome.scripting.executeScript({
-            target: {
-                tabId: tabs[0].id,
-                allFrames: true
-            },
-            function: fillSelfEvaluation,
-            args: []
-        });
+    runInPage(fillSelfEvaluation, [], (count) => {
+        showStatus(count > 0 ? `學習自評已填寫 ${count} 題` : '找不到可填寫的學習自評欄位');
     });
 });
 
@@ -136,14 +168,8 @@ updateSliderText();
 // 套用課程意見調查
 document.getElementById('apply-course').addEventListener('click', () => {
     const level = resolveCourseLevel(courseSlider.value);
-    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        chrome.scripting.executeScript({
-            target: {
-                tabId: tabs[0].id,
-                allFrames: true
-            },
-            function: fillCourseSurvey,
-            args: [level]
-        });
+    const label = courseLabelMap[level] || `${level} 分`;
+    runInPage(fillCourseSurvey, [level], (count) => {
+        showStatus(count > 0 ? `課程意見調查已填為「${label}」` : '找不到可填寫的課程意見欄位');
     });
 });

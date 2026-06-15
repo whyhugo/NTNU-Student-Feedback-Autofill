@@ -25,11 +25,12 @@ h3 {
 
 .card {
     background: #2b2930;
-    border-radius: 16px;
+    border-radius: 65px;
+    corner-shape: squircle;
     padding: 20px;
     margin-bottom: 16px;
-    border: none;
-    box-shadow: 
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow:
         0 1px 3px rgba(0, 0, 0, 0.3),
         0 4px 8px rgba(0, 0, 0, 0.15);
     text-align: left;
@@ -69,7 +70,8 @@ button {
     flex: 1;
     padding: 12px 24px;
     border: none;
-    border-radius: 20px;
+    border-radius: 45px;
+    corner-shape: squircle;
     cursor: pointer;
     font-size: 14px;
     font-weight: 500;
@@ -111,7 +113,8 @@ button:focus::after {
     position: absolute;
     inset: 0;
     border: 2px solid rgba(255, 255, 255, 0.35);
-    border-radius: 20px;
+    border-radius: 45px;
+    corner-shape: squircle;
 }
 
 button:active {
@@ -132,8 +135,9 @@ button:active {
     background: #7e57c2;
     width: 100%;
     margin-top: 16px;
-    border-radius: 100px;
-    padding: 14px 24px;
+    border-radius: 45px;
+    corner-shape: squircle;
+    padding: 12px 24px;
     font-size: 14px;
 }
 
@@ -245,15 +249,52 @@ button:active {
     display: inline-block;
     padding: 4px 12px;
     background: #49454f;
-    border-radius: 8px;
+    border-radius: 65px;
+    corner-shape: squircle;
     font-size: 12px;
     font-weight: 500;
     color: #e6e1e5;
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.10);
     letter-spacing: 0.1px;
     transition: background 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .pill:hover {
     background: #5a5662;
+}
+
+.status {
+    position: fixed;
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%) translateY(8px);
+    max-width: calc(100% - 40px);
+    padding: 10px 18px;
+    background: #322f3a;
+    color: #e6e1e5;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    line-height: 1.6;
+    text-align: center;
+    white-space: normal;
+    word-break: keep-all;
+    line-break: strict;
+    overflow-wrap: anywhere;
+    border-radius: 65px;
+    corner-shape: squircle;
+    box-shadow:
+        0 2px 6px rgba(0, 0, 0, 0.3),
+        0 8px 18px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10;
+    transition:
+        opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.status.visible {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
 }
