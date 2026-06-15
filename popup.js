@@ -44,7 +44,7 @@ function fillSelfEvaluation() {
         }
     });
 
-    alert('學習自評已填為「全部符合」');
+    // alert('學習自評已填為「全部符合」');
 }
 
 // 填寫「課程意見調查」區塊：依滑桿選擇 1~5 分
@@ -91,14 +91,17 @@ function fillCourseSurvey(level) {
         5: '非常符合'
     };
     const label = labelMap[level] || `${level} 分`;
-    alert(`課程意見調查已填為「${label}」`);
+    // alert(`課程意見調查已填為「${label}」`);
 }
 
 // 監聽學習自評：全部符合
 document.getElementById('self-pass').addEventListener('click', () => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.scripting.executeScript({
-            target: { tabId: tabs[0].id },
+            target: {
+                tabId: tabs[0].id,
+                allFrames: true
+            },
             function: fillSelfEvaluation,
             args: []
         });
@@ -109,7 +112,10 @@ document.getElementById('self-pass').addEventListener('click', () => {
 document.getElementById('self-fail').addEventListener('click', () => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.scripting.executeScript({
-            target: { tabId: tabs[0].id },
+            target: {
+                tabId: tabs[0].id,
+                allFrames: true
+            },
             function: fillSelfEvaluation,
             args: []
         });
@@ -132,7 +138,10 @@ document.getElementById('apply-course').addEventListener('click', () => {
     const level = resolveCourseLevel(courseSlider.value);
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         chrome.scripting.executeScript({
-            target: { tabId: tabs[0].id },
+            target: {
+                tabId: tabs[0].id,
+                allFrames: true
+            },
             function: fillCourseSurvey,
             args: [level]
         });
