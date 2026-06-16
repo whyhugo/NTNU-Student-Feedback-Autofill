@@ -3,15 +3,18 @@
   "name": "NTNU 期末課程評鑑速速填",
   "version": "1.2.2",
   "description": "快速填寫期末課程評鑑，可透過滑桿選擇程度，自動快速填入相同評分。",
-  "permissions": [
-    "activeTab",
-    "scripting"
-  ],
+  "permissions": ["activeTab", "scripting"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": "icon.png"
   },
   "icons": {
     "128": "icon.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "ntnu-student-feedback-autofill@whyhugo.github.io",
+      "strict_min_version": "109.0"
+    }
   }
 }
