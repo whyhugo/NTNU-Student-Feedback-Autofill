@@ -116,7 +116,10 @@ function showStatus(message) {
 // 在目前分頁（含所有 iframe）執行注入函式，並彙整各 frame 回傳的填寫題數
 async function runInPage(func, args, onDone) {
     try {
-        const tabs = await browser.tabs.query({ active: true, currentWindow: true });
+        const tabs = await browser.tabs.query({
+            active: true,
+            currentWindow: true
+        });
         if (!tabs || !tabs[0]) {
             showStatus('找不到作用中的分頁');
             return;
@@ -135,7 +138,6 @@ async function runInPage(func, args, onDone) {
             return sum + (typeof item.result === 'number' ? item.result : 0);
         }, 0);
         if (typeof onDone === 'function') onDone(total);
-
     } catch (error) {
         console.error(error);
         showStatus('無法在此頁面執行，請確認位於問卷頁面');

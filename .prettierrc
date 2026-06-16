@@ -1,0 +1,22 @@
+{
+    "printWidth": 120,
+    "tabWidth": 4,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "overrides": [
+        {
+            "files": "*.json",
+            "options": {
+                "tabWidth": 2
+            }
+        },
+        {
+            "files": "*.html",
+            "options": {
+                "printWidth": 240,
+                "htmlWhitespaceSensitivity": "ignore",
+                "singleAttributePerLine": false
+            }
+        }
+    ]
+}

@@ -39,7 +39,7 @@ h3 {
 }
 
 .card:hover {
-    box-shadow: 
+    box-shadow:
         0 2px 6px rgba(0, 0, 0, 0.3),
         0 8px 16px rgba(0, 0, 0, 0.2);
 }
@@ -79,7 +79,7 @@ button {
     position: relative;
     overflow: hidden;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 
+    box-shadow:
         0 1px 2px rgba(0, 0, 0, 0.3),
         0 1px 3px rgba(0, 0, 0, 0.15);
     letter-spacing: 0.1px;
@@ -95,7 +95,7 @@ button::before {
 }
 
 button:hover {
-    box-shadow: 
+    box-shadow:
         0 2px 4px rgba(0, 0, 0, 0.35),
         0 8px 18px rgba(0, 0, 0, 0.28);
 }
@@ -118,7 +118,7 @@ button:focus::after {
 }
 
 button:active {
-    box-shadow: 
+    box-shadow:
         0 1px 2px rgba(0, 0, 0, 0.35),
         0 2px 6px rgba(0, 0, 0, 0.28);
 }
@@ -180,7 +180,7 @@ button:active {
 
 #course-slider::-webkit-slider-thumb:hover {
     background: #e0d0ff;
-    box-shadow: 
+    box-shadow:
         0 2px 6px rgba(0, 0, 0, 0.4),
         0 0 0 8px rgba(208, 188, 255, 0.12);
 }
@@ -188,7 +188,7 @@ button:active {
 #course-slider::-webkit-slider-thumb:active {
     cursor: grabbing;
     background: #c0acef;
-    box-shadow: 
+    box-shadow:
         0 1px 3px rgba(0, 0, 0, 0.4),
         0 0 0 12px rgba(208, 188, 255, 0.16);
 }
@@ -254,7 +254,7 @@ button:active {
     font-size: 12px;
     font-weight: 500;
     color: #e6e1e5;
-    border: 1px solid rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     letter-spacing: 0.1px;
     transition: background 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
